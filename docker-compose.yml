@@ -1,0 +1,108 @@
+version: "3.3"
+services:
+
+  hub:
+    image: selenium/hub:3.141.59
+    container_name: selenium_hub
+    environment:
+      GRID_MAX_SESSION: 20
+      GRID_BROWSER_TIMEOUT: 3000
+      GRID_TIMEOUT: 3000
+    ports:
+      - "4444:4444"
+
+  firefox_1:
+    image: selenium/node-firefox-debug:3.141.59
+    container_name: selenium_node_firefox_1
+    links:
+      - hub:hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 3
+      NODE_MAX_INSTANCES: 3
+    ports:
+      - "9007:5900"
+    volumes:
+      - '/dev/shm:/dev/shm'
+      - './src/test/java/resources/testfiles:/home/seluser/src/test/java/resources/testfiles'
+
+  firefox_2:
+    image: selenium/node-firefox-debug:3.141.59
+    container_name: selenium_node_firefox_2
+    links:
+      - hub:hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 3
+      NODE_MAX_INSTANCES: 3
+    ports:
+      - "9008:5900"
+    volumes:
+      - '/dev/shm:/dev/shm'
+      - './src/test/java/resources/testfiles:/home/seluser/src/test/java/resources/testfiles'
+
+  firefox_3:
+    image: selenium/node-firefox-debug:3.141.59
+    container_name: selenium_node_firefox_3
+    links:
+      - hub:hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 3
+      NODE_MAX_INSTANCES: 3
+    ports:
+      - "9009:5900"
+    volumes:
+      - '/dev/shm:/dev/shm'
+      - './src/test/java/resources/testfiles:/home/seluser/src/test/java/resources/testfiles'
+
+  chrome_1:
+    image: selenium/node-chrome-debug:3.141.59
+    container_name: selenium_node_chrome_1
+    links:
+      - hub:hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 3
+      NODE_MAX_INSTANCES: 3
+    ports:
+      - "9001:5900"
+    volumes:
+      - '/dev/shm:/dev/shm'
+      - './src/test/java/resources/testfiles:/home/seluser/src/test/java/resources/testfiles'
+
+  chrome_2:
+    image: selenium/node-chrome-debug:3.141.59
+    container_name: selenium_node_chrome_2
+    links:
+      - hub:hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 3
+      NODE_MAX_INSTANCES: 3
+    ports:
+      - "9002:5900"
+    volumes:
+      - '/dev/shm:/dev/shm'
+      - './src/test/java/resources/testfiles:/home/seluser/src/test/java/resources/testfiles'
+
+  chrome_3:
+    image: selenium/node-chrome-debug:3.141.59
+    container_name: selenium_node_chrome_3
+    links:
+      - hub:hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 3
+      NODE_MAX_INSTANCES: 3
+    ports:
+      - "9003:5900"
+    volumes:
+      - '/dev/shm:/dev/shm'
+      - './src/test/java/resources/testfiles:/home/seluser/src/test/java/resources/testfiles'
